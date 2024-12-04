@@ -8,6 +8,8 @@ public class InfoPlayer : MonoBehaviour
     public int currentHealth;
     [SerializeField] private float cooldownTime; 
     [SerializeField] private float nextDamageTime;
+    [SerializeField] ParticleSystem particulasDMG;
+    [SerializeField] ParticleSystem particulasMuerte;
     public HealthBar healthBar;
 
     void Start()
@@ -25,6 +27,7 @@ public class InfoPlayer : MonoBehaviour
             if (Time.time > nextDamageTime)
             { 
                 TakeDamage(1);
+                Instantiate(particulasDMG,this.transform);
                 nextDamageTime = Time.time + cooldownTime;
             }
         }
@@ -37,6 +40,7 @@ public class InfoPlayer : MonoBehaviour
         healthBar.SetHealth(currentHealth);
         if (currentHealth <= 0)
         {
+            Instantiate(particulasMuerte, transform.position, transform.rotation);
             Destroy(gameObject,1);
         }         
     }
