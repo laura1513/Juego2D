@@ -30,6 +30,7 @@ public class IA_enemigo : MonoBehaviour
     private float esperaActual;
     private bool isMoving;
 
+    public InfoPlayer infoplayer;
 
     //Animator
     private Animator _animator;
@@ -169,4 +170,5 @@ public class IA_enemigo : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, distanciaVision); // Zona de visión
     }
+
 }
