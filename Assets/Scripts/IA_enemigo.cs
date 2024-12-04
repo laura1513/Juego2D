@@ -148,13 +148,13 @@ public class IA_enemigo : MonoBehaviour
                 GetComponent<BoxCollider2D>().enabled = false; //si muere ya no se le clavan flechas
                 agent.ResetPath(); //se para
                 currentState = EnemyState.Muerto; //cambiamos el estado
-                _animator.SetTrigger("Death");
-                Destroy(this.gameObject, 3);
+                //_animator.SetTrigger("Death");
+                Destroy(this.gameObject, 1);
             }
             else //Sino solo me quedo esperando y me quito vida.
             {
                 Debug.Log("Enemigo herido");
-                _animator.SetTrigger("Hit");
+                //_animator.SetTrigger("Hit");
                 agent.ResetPath(); //se para
                 currentState = EnemyState.Esperando; //cambiamos el estado
                 esperaActual = tiempoEspera;

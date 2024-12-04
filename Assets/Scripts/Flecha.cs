@@ -19,10 +19,10 @@ public class Flecha : MonoBehaviour
         _rb.isKinematic = true;
 
         //Si golpeamos a un enemigo le quitamos vida y destruimos la flecha
-       /* if (collision.gameObject.CompareTag("Enemigo"))
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            collision.gameObject.GetComponent<IA_Enemigo>().Golpear();
+            collision.gameObject.GetComponent<IA_enemigo>().Golpear();
             Destroy(this.gameObject);
-        }*/
+        }
     }
 }
