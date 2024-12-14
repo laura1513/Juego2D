@@ -77,6 +77,15 @@ public class IA_enemigo : MonoBehaviour
                 //Esperamos la muerte
                 break;
         }
+        // Lógica para girar el sprite según la dirección del movimiento
+        if (agent.velocity.x > 0.01f) // Movimiento hacia la derecha
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0); // Gira hacia la derecha
+        }
+        else if (agent.velocity.x < -0.01f) // Movimiento hacia la izquierda
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0); // Gira hacia la izquierda
+        }
     }
 
     private void Patrullar()
