@@ -54,10 +54,10 @@ public class IA_enemigo : MonoBehaviour
 
     void Update()
     {
-        //agent.velocity.magnitude es la variable buena, no agent.speed 
+        /*agent.velocity.magnitude es la variable buena, no agent.speed 
         if (agent.velocity.magnitude > 0.5f && !isMoving) { _animator.SetBool("Run", true); isMoving = true; }
         else if (agent.velocity.magnitude < 0.5f && isMoving) { _animator.SetBool("Run", false); isMoving = false; }
-
+        */
         switch (currentState)
         {
             case EnemyState.Patrullando:
