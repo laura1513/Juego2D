@@ -55,6 +55,7 @@ public class IA_enemigo : MonoBehaviour
     void Update()
     {
         /*agent.velocity.magnitude es la variable buena, no agent.speed 
+         * Si descomentas esto, la IA te sigue de manera no fluida xD. Me imagino que es porque busca las animaciones y tarda en actualizarse
         if (agent.velocity.magnitude > 0.5f && !isMoving) { _animator.SetBool("Run", true); isMoving = true; }
         else if (agent.velocity.magnitude < 0.5f && isMoving) { _animator.SetBool("Run", false); isMoving = false; }
         */
