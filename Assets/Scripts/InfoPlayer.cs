@@ -23,7 +23,7 @@ public class InfoPlayer : MonoBehaviour
     public void OnTriggerStay2D(Collider2D colision)
     {
         // Verificamos si colisiona con un objeto que tenga el tag "Enemy" o "Wizard o WizardEnemy"
-        if (colision.CompareTag("Enemy") || colision.CompareTag("Wizard")  || colision.CompareTag("WizardEnemy"))
+        if (colision.CompareTag("Enemy") || colision.CompareTag("Wizard")  || colision.CompareTag("WizardEnemy") || colision.CompareTag("Boss"))
         {
             if (Time.time > nextDamageTime)
             {

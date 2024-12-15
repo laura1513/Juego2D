@@ -9,6 +9,7 @@ TagManager:
   - PortalBlue
   - Wizard
   - WizardEnemy
+  - Boss
   layers:
   - Default
   - TransparentFX
