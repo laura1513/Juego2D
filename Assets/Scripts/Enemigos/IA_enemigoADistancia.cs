@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 public class IA_enemigoADistancia : MonoBehaviour
@@ -9,7 +10,6 @@ public class IA_enemigoADistancia : MonoBehaviour
 
     [Header("Variables del Enemigo")]
     [SerializeField] private float distanciaVision = 10f;
-    [SerializeField] private float distanciaAtaque = 2f;
     [SerializeField] private float tiempoEspera = 2f;
     [SerializeField] private UnityEvent eventoAtaque;
     [SerializeField] private Transform player;
@@ -19,33 +19,64 @@ public class IA_enemigoADistancia : MonoBehaviour
     [SerializeField] private Transform puntoDisparo;      // Posición desde donde se dispara
     [SerializeField] private float velocidadProyectil = 10f; // Velocidad del proyectil
     [SerializeField] private float intervaloDisparo = 1.5f;  // Tiempo entre disparos
+    [SerializeField] private float tiempoEntreDisparosTrasRecibirDanho = 2f; // Tiempo de espera después de recibir daño
 
     [Header("Vida del Enemigo")]
     [SerializeField] private int puntosVida;
 
+    private NavMeshAgent agent;
     private float esperaActual;
     private float tiempoUltimoDisparo; // Control del intervalo de disparos
+    private float tiempoUltimoDanho; // Controlar el cooldown después de recibir daño
 
     void Start()
     {
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;   //Estas dos lineas son 
+        agent.updateUpAxis = false;     //para que el enemigo no rote y deje de verse
         currentState = EnemyState.Esperando;
+
     }
 
     void Update()
     {
-        switch (currentState)
+        if (Time.time > tiempoUltimoDanho + tiempoEntreDisparosTrasRecibirDanho)
         {
-            case EnemyState.Atacando:
-                Atacar();
-                break;
+            MirarAlJugador();
 
-            case EnemyState.Esperando:
-                DetectarJugador();
-                break;
+            switch (currentState)
+            {
+                case EnemyState.Atacando:
+                    Atacar();
+                    break;
 
-            case EnemyState.Muerto:
-                // Lógica opcional para el estado muerto
-                break;
+                case EnemyState.Esperando:
+                    DetectarJugador();
+                    break;
+
+                case EnemyState.Muerto:
+                    // Lógica opcional para el estado muerto
+                    break;
+            }
+        }
+    }
+
+    private void MirarAlJugador()
+    {
+        // Detecta la posición del jugador relativa al enemigo
+        if (player != null)
+        {
+            // Verificar si el jugador está a la derecha o izquierda del enemigo
+            if (player.position.x > transform.position.x)
+            {
+                // El jugador está a la derecha, rotamos el enemigo 180 grados (mirando hacia la derecha)
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+            else if (player.position.x < transform.position.x)
+            {
+                // El jugador está a la izquierda, rotamos el enemigo 0 grados (mirando hacia la izquierda)
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
         }
     }
 
@@ -105,6 +136,9 @@ public class IA_enemigoADistancia : MonoBehaviour
                 currentState = EnemyState.Muerto;
                 Destroy(this.gameObject, 1f); // Destruir tras 1 segundo
             }
+
+            // Activar cooldown tras recibir daño
+            tiempoUltimoDanho = Time.time;
         }
     }
 
@@ -113,9 +147,5 @@ public class IA_enemigoADistancia : MonoBehaviour
         // Visualizar zona de visión
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, distanciaVision);
-
-        // Visualizar zona de ataque
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, distanciaAtaque);
     }
 }

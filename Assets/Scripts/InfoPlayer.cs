@@ -18,20 +18,22 @@ public class InfoPlayer : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
     }
 
-    
+
 
     public void OnTriggerStay2D(Collider2D colision)
     {
-        if (colision.CompareTag("Enemy"))
+        // Verificamos si colisiona con un objeto que tenga el tag "Enemy" o "Wizard o WizardEnemy"
+        if (colision.CompareTag("Enemy") || colision.CompareTag("Wizard")  || colision.CompareTag("WizardEnemy"))
         {
             if (Time.time > nextDamageTime)
-            { 
-                TakeDamage(1);
-                Instantiate(particulasDMG,this.transform);
-                nextDamageTime = Time.time + cooldownTime;
+            {
+                TakeDamage(1); // Aplicar daño
+                Instantiate(particulasDMG, this.transform); // Instanciar partículas
+                nextDamageTime = Time.time + cooldownTime; // Actualizar tiempo de espera para recibir daño
             }
         }
     }
+
 
     void TakeDamage (int damage)
     {

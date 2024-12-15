@@ -24,5 +24,11 @@ public class Flecha : MonoBehaviour
             collision.gameObject.GetComponent<IA_enemigo>().Golpear();
             Destroy(this.gameObject);
         }
+        else if (collision.gameObject.CompareTag("WizardEnemy"))
+        {
+            collision.gameObject.GetComponent<IA_enemigoADistancia>().Golpear();
+            Destroy(this.gameObject);
+        }
+
     }
 }

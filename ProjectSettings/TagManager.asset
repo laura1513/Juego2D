@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - PortalOrange
   - PortalBlue
+  - Wizard
+  - WizardEnemy
   layers:
   - Default
   - TransparentFX
@@ -19,8 +21,8 @@ TagManager:
   - pared
   - caida
   - enemy
-  - 
-  - 
+  - bolaFuego
+  - suelo
   - 
   - 
   - 
