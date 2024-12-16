@@ -14,7 +14,7 @@ public class DianaLaura : MonoBehaviour
         {
             //Cambiar de nivel
             Debug.Log("Diana");
-            SceneManager.LoadScene("LauraSambori");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
