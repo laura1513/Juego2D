@@ -38,6 +38,7 @@ public class IA_enemigoBossTp : MonoBehaviour
     private NavMeshAgent agent;
     private Transform destinoActual;
     private float tiempoInicioPersecucion;
+    [SerializeField] private GameObject puertaBoss;
 
     void Start()
     {
@@ -223,6 +224,7 @@ public class IA_enemigoBossTp : MonoBehaviour
         if (healthBar != null)
         {
             Destroy(healthBar.gameObject,1f);
+            Destroy(puertaBoss,3f);
         }
 
         Destroy(gameObject, 1f);

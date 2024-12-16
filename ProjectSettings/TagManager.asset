@@ -10,6 +10,7 @@ TagManager:
   - Wizard
   - WizardEnemy
   - Boss
+  - BossTp
   layers:
   - Default
   - TransparentFX
