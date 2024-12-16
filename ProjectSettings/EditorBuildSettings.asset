@@ -15,9 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/GameOver.unity
     guid: 0c385ef96ec57594bbd8b69787982548
   - enabled: 1
-    path: Assets/Scenes/Nivel1-Sam.unity
-    guid: 876215324accdb34db4d99c2f581fc0f
-  - enabled: 1
     path: Assets/Scenes/Nivel1-Aaron.unity
     guid: 71f3162ead4b44344a265afd7ddf2164
   - enabled: 1
@@ -32,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LauraSambori.unity
     guid: a74be71fe0810e644bbc47bf3067a981
+  - enabled: 1
+    path: Assets/Scenes/Nivel1-Sam.unity
+    guid: 876215324accdb34db4d99c2f581fc0f
+  - enabled: 1
+    path: Assets/Scenes/Win.unity
+    guid: c8256fe85812d4c4ab71fcb0b74132af
   m_configObjects: {}

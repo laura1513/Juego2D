@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class IA_enemigoBoss : MonoBehaviour
 {
@@ -193,6 +194,7 @@ public class IA_enemigoBoss : MonoBehaviour
         if (healthBar != null)
         {
             Destroy(healthBar.gameObject,1f);
+            SceneManager.LoadSceneAsync(9);
         }
 
         // Destruir el enemigo después de un pequeño retraso

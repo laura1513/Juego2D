@@ -8,13 +8,15 @@ public class DianaLaura : MonoBehaviour
 {
     public GameObject diana;
     public GameObject flecha;
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject)
+        if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Flecha"))
         {
             //Cambiar de nivel
-            Debug.Log("Diana");
+            
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            Debug.Log(SceneManager.GetActiveScene().buildIndex+1);
+
         }
     }
 
