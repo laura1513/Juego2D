@@ -4,5 +4,32 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 2845a8da7eece5d4fa36d5c348925f1e
+  - enabled: 1
+    path: Assets/Scenes/LevelSelect.unity
+    guid: 2736e025f7633334dad5c2bf049fa134
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: 0c385ef96ec57594bbd8b69787982548
+  - enabled: 1
+    path: Assets/Scenes/Nivel1-Sam.unity
+    guid: 876215324accdb34db4d99c2f581fc0f
+  - enabled: 1
+    path: Assets/Scenes/Nivel1-Aaron.unity
+    guid: 71f3162ead4b44344a265afd7ddf2164
+  - enabled: 1
+    path: Assets/Scenes/Nivel2-Aaron.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/Scenes/Nivel2-Sam.unity
+    guid: 8c046cf1e0d746b4f8c6c1dad91b07ff
+  - enabled: 1
+    path: Assets/Scenes/Laura1.unity
+    guid: 60fc6cd3ccce245429d6a73a4874841b
+  - enabled: 1
+    path: Assets/Scenes/LauraSambori.unity
+    guid: a74be71fe0810e644bbc47bf3067a981
   m_configObjects: {}
