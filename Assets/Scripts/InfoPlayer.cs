@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class InfoPlayer : MonoBehaviour
 {
@@ -44,6 +45,7 @@ public class InfoPlayer : MonoBehaviour
         {
             Instantiate(particulasMuerte, transform.position, transform.rotation);
             Destroy(gameObject,1);
+            SceneManager.LoadSceneAsync(2);
         }         
     }
 }
