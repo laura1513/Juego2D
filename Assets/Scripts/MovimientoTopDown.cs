@@ -133,7 +133,7 @@ public class MovimientoTopDown : MonoBehaviour
             {
                 Debug.Log("Golpeado");
                 //Instantiate(particulasAtaque, hit.collider.transform.position, hit.collider.transform.rotation); genera particulas
-                hit.collider.gameObject.GetComponent<IA_enemigo>().Golpear();//tiene el quitar vida en el enemigo
+                hit.collider.gameObject.GetComponent<IA_enemigoCaC>().Golpear();//tiene el quitar vida en el enemigo
             }
             else
             {

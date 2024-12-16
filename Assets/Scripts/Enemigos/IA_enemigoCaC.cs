@@ -4,7 +4,7 @@ using UnityEngine.AI;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class IA_enemigo : MonoBehaviour
+public class IA_enemigoCaC : MonoBehaviour
 {
     public enum EnemyState { Patrullando, Persiguiendo, Atacando, Esperando, Muerto }
     private EnemyState currentState;
