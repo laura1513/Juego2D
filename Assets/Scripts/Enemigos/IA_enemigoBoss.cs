@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
-public class IA_enemigoBoss: MonoBehaviour
+public class IA_enemigoBoss : MonoBehaviour
 {
     public enum EnemyState { Patrullando, Atacando, Escapando, Esperando, Muerto }
     private EnemyState currentState;
@@ -16,42 +16,47 @@ public class IA_enemigoBoss: MonoBehaviour
     [SerializeField] private Transform player;
 
     [Header("Movimiento de Patrulla")]
-    [SerializeField] private Transform puntoA; // Punto inicial de la patrulla
-    [SerializeField] private Transform puntoB; // Punto final de la patrulla
+    [SerializeField] private Transform puntoA;
+    [SerializeField] private Transform puntoB;
     [SerializeField] private float velocidadPatrulla = 3f;
 
     [Header("Ataque con Proyectil")]
-    [SerializeField] private GameObject proyectilPrefab;   // Prefab del proyectil
-    [SerializeField] private Transform puntoDisparo;      // Posición desde donde se dispara
-    [SerializeField] private float velocidadProyectil = 10f; // Velocidad del proyectil
-    [SerializeField] private float intervaloDisparo = 1.5f;  // Tiempo entre disparos
-    [SerializeField] private float tiempoEntreDisparosTrasRecibirDanho = 2f; // Tiempo de espera después de recibir daño
+    [SerializeField] private GameObject proyectilPrefab;
+    [SerializeField] private Transform puntoDisparo;
+    [SerializeField] private float velocidadProyectil = 10f;
+    [SerializeField] private float intervaloDisparo = 1.5f;
 
     [Header("Vida del Enemigo")]
-    [SerializeField] private int puntosVida;
+    [SerializeField] private int maxPuntosVida; // Vida máxima
+    private int puntosVida;
+    [SerializeField] private HealthBar healthBar;
+    [SerializeField] private float cooldownTime = 1f; // Cooldown de daño
+    private float nextDamageTime; // Control del próximo daño
 
     [Header("Objeto Adicional a Eliminar")]
-    [SerializeField] private GameObject objetoAEliminar; // Para eliminar la otra parte del boss al morir
+    [SerializeField] private GameObject objetoAEliminar;
 
     private NavMeshAgent agent;
-    private float tiempoUltimoDisparo; // Control del intervalo de disparos
-    private float tiempoUltimoDanho; // Controlar el cooldown después de recibir daño
+    private float tiempoUltimoDisparo;
+    private float tiempoUltimoDanho;
 
-    private Transform destinoActual; // Destino actual para patrullar
+    private Transform destinoActual;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.updateRotation = false; // Evitar que el enemigo rote automáticamente
+        agent.updateRotation = false;
         agent.updateUpAxis = false;
 
-        currentState = EnemyState.Patrullando; // Estado inicial
-        destinoActual = puntoA; // Empieza yendo hacia el punto A
+        puntosVida = maxPuntosVida;
+        healthBar.SetMaxHealth(maxPuntosVida); // Configurar barra de vida
+        currentState = EnemyState.Patrullando;
+        destinoActual = puntoA;
     }
 
     void Update()
     {
-        if (Time.time > tiempoUltimoDanho + tiempoEntreDisparosTrasRecibirDanho)
+        if (Time.time > tiempoUltimoDanho + intervaloDisparo)
         {
             MirarAlJugador();
 
@@ -61,15 +66,12 @@ public class IA_enemigoBoss: MonoBehaviour
                     Patrullar();
                     DetectarJugador();
                     break;
-
                 case EnemyState.Atacando:
                     Atacar();
                     break;
-
                 case EnemyState.Escapando:
                     Escapar();
                     break;
-
                 case EnemyState.Esperando:
                     DetectarJugador();
                     break;
@@ -81,7 +83,6 @@ public class IA_enemigoBoss: MonoBehaviour
     {
         if (player != null)
         {
-            // Rotar para mirar al jugador en base a su posición relativa
             float dirX = player.position.x - transform.position.x;
             transform.rotation = Quaternion.Euler(0, dirX > 0 ? 180 : 0, 0);
         }
@@ -108,7 +109,6 @@ public class IA_enemigoBoss: MonoBehaviour
             agent.speed = velocidadPatrulla;
             agent.SetDestination(destinoActual.position);
 
-            // Cambiar al siguiente destino cuando se alcanza el actual
             if (Vector3.Distance(transform.position, destinoActual.position) < 0.5f)
             {
                 destinoActual = destinoActual == puntoA ? puntoB : puntoA;
@@ -130,8 +130,8 @@ public class IA_enemigoBoss: MonoBehaviour
         }
         else
         {
-            agent.SetDestination(transform.position); // Detener el movimiento
-            // Disparar proyectiles si se cumple el intervalo de disparos
+            agent.SetDestination(transform.position);
+
             if (Time.time > tiempoUltimoDisparo + intervaloDisparo)
             {
                 DispararProyectil();
@@ -150,7 +150,6 @@ public class IA_enemigoBoss: MonoBehaviour
         }
         else
         {
-            // Moverse en la dirección opuesta al jugador
             Vector3 direccionEscape = (transform.position - player.position).normalized;
             Vector3 destinoEscape = transform.position + direccionEscape * 5f;
             agent.SetDestination(destinoEscape);
@@ -173,17 +172,15 @@ public class IA_enemigoBoss: MonoBehaviour
 
     public void Golpear()
     {
-        if (currentState != EnemyState.Muerto)
+        if (currentState != EnemyState.Muerto && Time.time >= nextDamageTime)
         {
-            puntosVida--;
+            puntosVida -= 1;
+            healthBar.SetHealth(puntosVida); // Actualizar barra de vida
+            nextDamageTime = Time.time + cooldownTime; // Actualizar el tiempo para recibir daño de nuevo
 
             if (puntosVida <= 0)
             {
                 Matar();
-            }
-            else
-            {
-                tiempoUltimoDanho = Time.time; // Actualizar cooldown tras daño
             }
         }
     }
@@ -192,13 +189,18 @@ public class IA_enemigoBoss: MonoBehaviour
     {
         currentState = EnemyState.Muerto;
 
+        // Destruir la barra de vida
+        if (healthBar != null)
+        {
+            Destroy(healthBar.gameObject,1f);
+        }
+
         // Destruir el enemigo después de un pequeño retraso
         Destroy(gameObject, 1f);
 
-        // Destruir el objeto adicional si se ha asignado
         if (objetoAEliminar != null)
         {
-            Destroy(objetoAEliminar,1f);
+            Destroy(objetoAEliminar, 1f);
         }
     }
 
@@ -212,4 +214,3 @@ public class IA_enemigoBoss: MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, distanciaSegura);
     }
 }
-
