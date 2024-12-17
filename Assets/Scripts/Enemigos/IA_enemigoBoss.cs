@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class IA_enemigoBoss : MonoBehaviour
 {
-    public enum EnemyState { Patrullando, Atacando, Escapando, Esperando, Muerto }
+    public enum EnemyState { Patrullando, Atacando, Escapando, Muerto }
     private EnemyState currentState;
 
     [Header("Variables del Enemigo")]
@@ -72,9 +72,6 @@ public class IA_enemigoBoss : MonoBehaviour
                     break;
                 case EnemyState.Escapando:
                     Escapar();
-                    break;
-                case EnemyState.Esperando:
-                    DetectarJugador();
                     break;
             }
         }
