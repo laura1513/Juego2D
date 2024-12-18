@@ -3823,7 +3823,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pointA: {fileID: 7093084472086903186}
   pointB: {fileID: 5069432851519489953}
-  distanciaVision: 5
+  distanciaVision: 8.39
   distanciaAtaque: 0.8
   tiempoEspera: 3
   eventoAtaque:
@@ -4463,7 +4463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6845370409141469668}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: EnemyCaC
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4647,7 +4647,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7093084472086903186}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PointA
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4663,7 +4663,7 @@ Transform:
   m_GameObject: {fileID: 8666270640774263323}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.39, y: 1.56, z: 0}
+  m_LocalPosition: {x: -2.39, y: 5.37, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4807,7 +4807,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5069432851519489953}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: PointB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4823,7 +4823,7 @@ Transform:
   m_GameObject: {fileID: 9094843131983005075}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.48, y: 5.36, z: 0}
+  m_LocalPosition: {x: 3.31, y: 1.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

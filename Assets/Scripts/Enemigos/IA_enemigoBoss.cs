@@ -190,7 +190,7 @@ public class IA_enemigoBoss : MonoBehaviour
         // Destruir la barra de vida
         if (healthBar != null)
         {
-            Destroy(healthBar.gameObject,1f);
+            Destroy(healthBar.gameObject, 1f);
             SceneManager.LoadSceneAsync(9);
         }
 

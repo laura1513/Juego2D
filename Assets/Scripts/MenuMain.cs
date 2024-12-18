@@ -38,6 +38,11 @@ public class MenuMain : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(8);
     }
+
+    public void ProbarIAs()
+    {
+        SceneManager.LoadSceneAsync(10);
+    }
     public void QuitGame()
     {
         Application.Quit();
